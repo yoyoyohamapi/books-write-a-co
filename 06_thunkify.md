@@ -1,7 +1,8 @@
-thunk化
-=============
+thunk 化
+========
 
-在我们的`runGenerator`中，有如下代码片：
+在我们的 `runGenerator` 中，有如下代码片：
+
 ```js
 function runGenerator(gen) {
     // ...
@@ -45,10 +46,11 @@ function runGenerator(gen) {
 ```
 
 这一部分代码的重复率很高，都是：
-    - 出错时：执行`next(err)`
-    - 正确时：执行`next(null, res)`
 
-如果我们首先对`value`thunk化：
+-	出错时：执行 `next(err)`
+-	正确时：执行 `next(null, res)`
+
+如果我们首先对 `value` thunk 化：
 
 ```js
 function toThunk(fn) {
@@ -89,7 +91,7 @@ function toThunk(fn) {
 }
 ```
 
-那么就能避免上文的重复问题，现在，`runGenerator`中只需要一个判断逻辑了：
+那么就能避免上文的重复问题，现在，`runGenerator` 中只需要一个判断逻辑了：
 
 ```js
 function runGenerator(gen) {

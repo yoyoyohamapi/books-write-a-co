@@ -1,7 +1,8 @@
 俘获返回值
-=============
+==========
 
-假定我们不需要直接打印文件信息，而是希望通过传统`return`来返回文件信息，这样，有助于解除信息打印和信息获取间的耦合，让`*main`只关注获得文件信息，而可以把信息的打印，再处理等工作交给其他函数完成：
+假定我们不需要直接打印文件信息，而是希望通过传统 `return` 来返回文件信息，这样，有助于解除信息打印和信息获取间的耦合，让 `*main` 只关注获得文件信息，而可以把信息的打印，再处理等工作交给其他函数完成：
+
 ```js
 function *main() {
     const sizeInfo = {
@@ -23,14 +24,14 @@ function *main() {
 }
 ```
 
-但是，接下来我们就手足无措了，如下代码是肯定拿不到文件信息的，因为`*main`方法尚没有渠道把`sizeInfo`交付给运行器：
+但是，接下来我们就手足无措了，如下代码是肯定拿不到文件信息的，因为 `*main` 方法尚没有渠道把 `sizeInfo` 交付给运行器：
 
 ```js
 let sizeInfo = runGenerator(main);
 console.dir(sizeInfo); // undefined
 ```
 
-由于业务流程是异步的，所以，想要generator把最终获得值递交给执行器，也只有通过异步的方式传递，下面的调用方式才有可能获得`sizeInfo`：
+由于业务流程是异步的，所以，想要 generator 把最终获得值递交给执行器，也只有通过异步的方式传递，下面的调用方式才有可能获得 `sizeInfo`：
 
 ```js
 runGenerator(main, function(err, sizeInfo){
@@ -42,7 +43,8 @@ runGenerator(main, function(err, sizeInfo){
 });
 ```
 
-为了实现上述的调用方式，改造我们的`runGenerator`：
+为了实现上述的调用方式，改造我们的 `runGenerator`：
+
 ```js
 function runGenerator(gen, cb) {
     // 先获得迭代器
@@ -78,7 +80,7 @@ function runGenerator(gen, cb) {
 }
 ```
 
-这样做还不是最好的，我们可以把运行器也thunk化，这样，能将对generator函数的封装和驱动generator运行分开：
+这样做还不是最好的，我们可以把运行器也 thunk 化，这样，能将对 generator 函数的封装和驱动 generator 运行分开：
 
 ```js
 function wrap(gen) {

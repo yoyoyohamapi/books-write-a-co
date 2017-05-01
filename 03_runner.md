@@ -1,7 +1,7 @@
 执行器
-=============
+======
 
-上一节中，我们利用generator，实现了以同步式代码的形式来组织异步流程，但是，如果我们有多个generator函数，则需要手动驱动每个generator的运行，而且这些代码大体是重复的：
+上一节中，我们利用 generator，实现了以同步式代码的形式来组织异步流程，但是，如果我们有多个 generator 函数，则需要手动驱动每个 generator 的运行，而且这些代码大体是重复的：
 
 ```js
 function *gen1(){}
@@ -17,7 +17,7 @@ it2.next();
 it3.next();
 ```
 
-因此，我们考虑设计一个执行器（runner），来驱动generator的运行：
+因此，我们考虑设计一个执行器（runner），来驱动 generator 的运行：
 
 ```js
 /**
@@ -56,9 +56,10 @@ function runGenerator(generatorFunc) {
 ```
 
 thunkify
------------
+--------
 
-在执行器中，我们重新设计了一个`next`方法用于继续generator执行，其中的关键代码片：
+在执行器中，我们重新设计了一个 `next` 方法用于继续 generator 执行，其中的关键代码片：
+
 ```js
 if(typeof value === 'function') {
     value.call(this, function(err, response) {
@@ -71,7 +72,7 @@ if(typeof value === 'function') {
 }
 ```
 
-这里是为了能够以函数的形式进入暂态，使得我们的异步流程不再耦合迭代器的`next`方法，只需要[thunk](https://en.wikipedia.org/wiki/Thunk)化原有的异步函数：
+这里是为了能够以函数的形式进入暂态，使得我们的异步流程不再耦合迭代器的 `next` 方法，只需要 [thunk](https://en.wikipedia.org/wiki/Thunk) 化原有的异步函数：
 
 ```js
 function async(parameters) {
@@ -86,7 +87,7 @@ function async(parameters) {
 }
 ```
 
-[node-thunkify](https://github.com/tj/node-thunkify)是最流行的将一个函数thunk的工具，我也写过一个关于thunkify的文章：[戳我查看](http://yoyoyohamapi.me/2016/08/09/JavaScript/thunkify/)。借助于thunkify，我们可以不侵入原来的异步过程：
+[node-thunkify](https://github.com/tj/node-thunkify) 是最流行的将一个函数 thunk 的工具，我也写过一个关于 thunkify 的文章：[戳我查看](http://yoyoyohamapi.me/2016/08/02/thunkify/)。借助于 thunkify，我们可以不侵入原来的异步过程：
 
 ```js
 const thunkify = require('thunkify');
@@ -96,6 +97,7 @@ const readThunked = thunkify(fs.readFile);
 ```
 
 通过运行器，第一节中的问题解决方式就变为如下：
+
 ```js
 const fs = require('fs');
 

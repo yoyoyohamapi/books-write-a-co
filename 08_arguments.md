@@ -1,6 +1,7 @@
 向generator函数传递参数
-===============
-我们修改一下第一节提出的问题，现在，不再是固定统计`file1.md`，`file2.md`，`file3.md`三个文件的大小，而是支持任意传递任意的文件序列进行统计，显然，我们就要允许generator函数允许接收参数：
+=======================
+
+我们修改一下第一节提出的问题，现在，不再是固定统计 `file1.md`，`file2.md`，`file3.md` 三个文件的大小，而是支持任意传递任意的文件序列进行统计，显然，我们就要允许 generator 函数允许接收参数：
 
 ```js
 function *main(files) {
@@ -40,7 +41,7 @@ wrap(main)(['file1.md', 'file2.md', 'file3.md'], function(err, sizeInfo){
 });
 ```
 
-在这种调用方式中，我们规范最后一个参数为固定的回调函数，其余皆为传递给generator函数的参数，为此，我们需要修改`wrap`包装器，让其在调用generator函数时，将参数交付：
+在这种调用方式中，我们规范最后一个参数为固定的回调函数，其余皆为传递给 generator 函数的参数，为此，我们需要修改 `wrap` 包装器，让其在调用 generator 函数时，将参数交付：
 
 ```js
 function wrap(gen) {

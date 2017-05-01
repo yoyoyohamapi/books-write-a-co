@@ -1,6 +1,7 @@
 支持Promise
-==============
-Promise是解决传统回调陷阱（callback hell）的一个策略，如果还不了解的Promise的，这篇[Javascript-Promise迷你书](http://liubin.org/promises-book/)会是最好选择，详细介绍了前世今生、设计哲学和使用方法。
+===========
+
+Promise 是解决传统回调陷阱（callback hell）的一个策略。如果还不了解的 Promise 的，这篇 [Javascript-Promise 迷你书](http://liubin.org/promises-book/)会是最好选择，详细介绍了前世今生、设计哲学和使用方法。
 
 如果使用promise，我们解决第一节中的问题就会是如下代码：
 
@@ -39,7 +40,7 @@ function *main() {
 }
 ```
 
-可以用如下的方式判断一个对象是否是Promise对象：
+可以用如下的方式判断一个对象是否是 Promise 对象：
 
 ```js
 function isPromise(obj) {
@@ -47,7 +48,7 @@ function isPromise(obj) {
 }
 ```
 
-为了支持以Promise构建业务逻辑，就需要对运行器作出如下修改：
+为了支持以 Promise 构建业务逻辑，就需要对运行器作出如下修改：
 
 ```js
 function runGenerator(gen) {
@@ -76,4 +77,4 @@ function runGenerator(gen) {
 }
 ```
 
-到本节末为止，我们借助于一个运行器`runGenerator`就可以用更优雅的、同步式的方式来组织我们的业务流程，在接下来的章节，我们着重优化这个工具函数。
+到本节末为止，我们借助于一个运行器 `runGenerator` 就可以用更优雅的、同步式的方式来组织我们的业务流程，在接下来的章节，我们着重优化这个工具函数。
